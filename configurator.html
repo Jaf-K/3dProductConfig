@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Table Configurator</title>
+
+		<link rel="stylesheet" href="public/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@v0.163.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@v0.163.0/examples/jsm/"
+        }
+      }
+    </script>
+	</head>
+	<body style="background-color: #b0b0b0; overflow: hidden;">
+    <div id="banner" style="position: absolute; left: 49%; text-align: center; padding-top: 10px;" class="heading">
+      <a href="#" style="position: relative;">
+          <span class="glyphicon glyphicon-menu-hamburger" style="scale: 200%; left: -500px; top: 40px; color: rgb(39, 39, 39);"></span>
+      </a>
+      <span id="logo" style="text-align: center; position: absolute; left: -40px;">
+          <h3 style="color: white; font-family: SF Distant Galaxy; src: local('SF Distant Galaxy'), url(./fonts/SF\ Distant\ Galaxy.ttf), format('ttf');">Be Made</h3>
+      </span>
+    </div>
+    <div style="position: absolute;">
+      <button type="image" class="btn btn-default btn-sm" style="background-color: #00000000; outline: none; border: none; position: absolute; top: 65vh; left: 9vw; width: 80px; height: 80px; text-align: center;" src="glyphicon glyphicon-send">
+        <span class="glyphicon glyphicon-send" style="scale: 300%;"></span>
+        <p style="position: absolute; top: 75%; left: 25%;"><b>ORDER</b></p>
+      </button>
+      <button type="image" class="btn btn-default btn-sm" style="background-color: #00000000; outline: none; border: none; position: absolute; top: 65vh; left: 84vw; width: 80px; height: 80px; text-align: center;" src="glyphicon glyphicon-wrench" onclick="showUIPanel()">
+        <span class="glyphicon glyphicon-wrench" style="scale: 300%; position: absolute; top: 44%; left: 26%; transform: rotateZ(-24deg);"></span>
+        <span class="glyphicon glyphicon-cog" style="scale: 300%; position: absolute; top: 53%;"></span>
+        <p style="position: absolute; top: 85%; left: 4%;"><b>CONFIGURE</b></p>
+      </button>
+    </div>
+    <div class="ConfigUIpanel" style="position: absolute; right: 0px; display: none;" id="tableSettings">
+      <button type="image" class="btn btn-default btn-sm" style="background-color: rgba(255, 255, 255, 0); border: none; outline: none; position: relative; left: 10px; top: 10px" src="glyphicon glyphicon-chevron-right" onclick="hideUIPanel()">
+        <span class="glyphicon glyphicon-chevron-right" style="scale: 200%;"></span>
+      </button>
+      <div class="slidecontainer" style="position: relative; left: 10%; top: 7%;">
+        <p style="text-align: left; color: #d3d3d3;">Length</p><p style="color: #d3d3d3; float: right; position: absolute; top:0%; left: 85%;" id="lenLbl"></p>
+        <input type="range" min="1800" max="2200" value="2000" class="slider" id="LengthSlider">
+      </div>
+      <br />
+      <div class="slidecontainer" style="position: relative; left: 10%; top: 7%;">
+        <p style="text-align: left; color: #d3d3d3;">Depth</p><p style="color: #d3d3d3; float: right; position: absolute; top:0%; left: 85%;" id="dpthLbl"></p>
+        <input type="range" min="800" max="1000" value="900" class="slider" id="DepthSlider">
+      </div>
+      <br/>
+      <br/>
+      <div style="position: relative; left: 20%; top: 7%" href="#">
+        <button onclick="ABSelected()" id="atmn"><img src="./public/images/autumn-bronze-new-3-scaled.jpg" style="width: 50px; height: auto;"></button>
+        <button onclick="TwiSelected()" id="twi"><img src="./public/images/FIOR_DI_BOSCO_1-1024x2048.jpg" style="width: 50px; height: auto;" ></button>
+        <button onclick="KenyaSelected()" id="kenya"><img src="./public/images/KENYA_1-1034x2048.jpg" style="width: 50px; height: auto;"></button>
+      </div>
+    </div>
+    <div id="progress-container">
+      <div id="progress">Rendering...</div>
+    </div>
+    <script type="module" src="./main.js"></script>
+    <script>
+      var slider = document.getElementById("LengthSlider");
+      var slider2 = document.getElementById("DepthSlider");
+      var output = document.getElementById("lenLbl");
+      var output2 = document.getElementById("dpthLbl");
+      output.innerHTML = slider.value; // Display the default slider value
+      output2.innerHTML = slider2.value;
+
+      // Update the current slider value (each time you drag the slider handle)
+
+      function hideUIPanel(){
+        var tohide = document.getElementById("tableSettings");
+        var tomove = document.getElementById("banner");
+        tohide.style.display = "none";
+        tohide.classList.add("UIout");
+        tomove.style.left = "49vw";
+      }
+
+      function showUIPanel(){
+        var tohide = document.getElementById("tableSettings");
+        tohide.classList.add("UIIn");
+        tohide.style.display = "block";
+      }
+    </script>
+	</body>
+</html>
